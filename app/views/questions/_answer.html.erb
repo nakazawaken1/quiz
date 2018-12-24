@@ -1,0 +1,12 @@
+<h3>
+   <i class="material-icons">
+        <%= @icon %>
+    </i>
+    <span><%= @result %></span>
+</h3>
+<% if @correct %>
+<h2>解説</h2>
+<div id="comment">
+    <%= @question.comment %>
+</div>
+<% end %>
