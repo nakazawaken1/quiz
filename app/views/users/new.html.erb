@@ -1,7 +1,7 @@
 <% @user.errors.full_messages.each do |message| %>
     <div><%= message %></div>
 <% end %>
-<%= form_with model: @user do |form| %>
+<%= form_with url: "/users/new", model: @user, local: true do |form| %>
     <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
         <input type="text" name="name" id="name" class="mdc-text-field__input">
         <div class="mdc-notched-outline">
