@@ -16,7 +16,7 @@
 body {
     margin: 0;
 }
-#yield {
+#main-content {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
@@ -28,4 +28,52 @@ h2 {
 
 .br {
     margin: 1em;
+}
+
+.error {
+    color: red;
+}
+
+.notice {
+    color: blue;
+}
+
+a,a:link,a:visited {
+    color: inherit;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .mdc-drawer-app-content {
+    flex: auto;
+    overflow: auto;
+    position: relative;
+  }
+  
+  .yeild {
+    overflow: auto;
+    height: 100%;
+  }
+  
+  .app-bar {
+    position: absolute;
+  }
+  
+  // only apply this style if below top app bar
+  .mdc-top-app-bar {
+    z-index: 7;
+  }
+  .aside {
+    margin-left: 200px;
+}
+
+table.grid {
+    border-collapse: collapse;
+}
+table.grid th,table.grid td {
+    padding: 0.5em 1em;
+    border: 1px solid silver;
 }

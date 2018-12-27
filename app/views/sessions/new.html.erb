@@ -1,0 +1,35 @@
+<h1><% t :login %></h1>
+<% @user.errors.full_messages.each do |message| %>
+    <div class="error"><%= message %></div>
+<% end %>
+<div class="error"><%= flash[:notice] %></div>
+<%= form_with url: "/sessions/create", model: @user, local: true, id: :form do |form| %>
+    <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="text" name="mail" id="mail" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="mail" class="mdc-floating-label"><%= t 'activerecord.attributes.user.mail' %></label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <div class="br"></div>
+    <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="password" name="password" id="password" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="password" class="mdc-floating-label"><%= t 'activerecord.attributes.user.password' %></label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <div class="br"></div>
+    <button type="submit" class="mdc-button
+                       mdc-button--raised
+                       mdc-button--primary
+                       mdc-ripple-surface"
+                data-mdc-auto-init="MDCRipple"><%= t :login %></button>
+    <a href="/signup"><%= t :prompt_signup %></a>
+<% end %>

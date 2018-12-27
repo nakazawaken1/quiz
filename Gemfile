@@ -59,3 +59,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jquery-rails'
 gem 'bcrypt', '>= 3.1.12'
 gem 'rails-i18n'
+gem 'rspec-rails'
+gem 'rails-controller-testing'
+gem 'factory_bot_rails'

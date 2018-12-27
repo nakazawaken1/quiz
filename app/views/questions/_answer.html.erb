@@ -1,12 +1,17 @@
 <h3>
    <i class="material-icons">
-        <%= @icon %>
+        <%= icon %>
     </i>
-    <span><%= @result %></span>
+    <span><%= result %></span>
 </h3>
-<% if @correct %>
-<h2>解説</h2>
+<% if correct %>
+<h2><%= t 'activerecord.attributes.question.comment' %></h2>
 <div id="comment">
-    <%= @question.comment %>
+    <%= safe_join(question.comment.to_s.split("\n"), tag(:br)) %>
+</div>
+<% else %>
+<h2><%= t 'activerecord.attributes.question.hint' %></h2>
+<div>
+  <%= safe_join(question.hint.to_s.split("\n"), tag(:br)) %>
 </div>
 <% end %>

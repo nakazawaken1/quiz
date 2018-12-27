@@ -1,0 +1,54 @@
+<% @user.errors.full_messages.each do |message| %>
+    <div class="error"><%= message %></div>
+<% end %>
+<%= form_with url: '/users/' + (@user.id ? 'update' : 'create'), model: @user, local: true, id: :form do |form| %>
+    <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="text" name="name" id="name" value="<%= @user.name %>" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="name" class="mdc-floating-label"><%= t 'activerecord.attributes.user.name' %></label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <div class="br"></div>
+    <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="text" name="mail" id="mail" value="<%= @user.mail %>" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="mail" class="mdc-floating-label"><%= t 'activerecord.attributes.user.mail' %></label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <div class="br"></div>
+    <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="password" name="password" id="password" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="password" class="mdc-floating-label"><%= t 'activerecord.attributes.user.password' %></label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <div class="br"></div>
+    <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="password" name="password_confirmation" id="password_confirmation" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="password_confirmation" class="mdc-floating-label"><%= t 'activerecord.attributes.user.password_confirmation' %></label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <div class="br"></div>
+    <button type="submit" class="mdc-button
+                       mdc-button--raised
+                       mdc-button--primary
+                       mdc-ripple-surface"
+                data-mdc-auto-init="MDCRipple"><%= @user.id ? t(:update) : t(:create) %></button>
+<% end %>

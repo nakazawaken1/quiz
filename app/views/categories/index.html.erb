@@ -1,19 +1,19 @@
-<h1><%= t 'activerecord.models.question' %><%= t :list %></h1>
+<h1><%= t 'activerecord.models.category' %><%= t :list %></h1>
 
 <table class="grid">
   <thead>
     <tr>
-      <th><%= t 'activerecord.attributes.question.question' %></th>
+      <th><%= t 'activerecord.attributes.category.name' %></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @questions.each do |question| %>
+    <% @categories.each do |category| %>
       <tr>
-        <td><%= link_to question.question, "/questions/#{question.id}" %></td>
+        <td><%= link_to category.name, "/categories/#{category.id}" %></td>
       </tr>
     <% end %>
-    <% if @questions.empty? %>
+    <% if @categories.empty? %>
       <tr>
         <td><%= t :empty %></td>
       </tr>
@@ -23,7 +23,7 @@
 
 <br>
 
-<a href="/questions/new" class="mdc-button
+<a href="/categories/new" class="mdc-button
                        mdc-button--raised
                        mdc-button--primary
                        mdc-ripple-surface"

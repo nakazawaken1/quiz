@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Quiz</title>
+    <title><%= t :title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -12,16 +12,49 @@
   <body class="mdc-typography">
     <header class="mdc-top-app-bar mdc-top-app-bar--fixed" data-mdc-auto-init="MDCTopAppBar">
       <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start<%= @current_user ? ' aside' : '' %>">
+<% if @current_user %>
           <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
-          <span class="mdc-top-app-bar__title">Quiz</span>
+<% end %>
+          <a class="mdc-top-app-bar__title" href="/"><%= t :title %></a>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+<% unless @current_user %>
+          <a href="/login" class="material-icons mdc-top-app-bar__action-item" title="<%= t :login %>">person_outline</a>
+<% end %>
+          <a href="/signup" class="material-icons mdc-top-app-bar__action-item" title="<%= t :signup %>">person_add</a>
         </section>
       </div>
     </header>
-    <div id="yield" class="mdc-top-app-bar--fixed-adjust">
-      <%= yield %>
+<% if @current_user %>
+    <aside class="mdc-drawer">
+      <div class="mdc-drawer__header">
+        <h3 class="mdc-drawer__title"><a href="/users/edit" class="mdc-top-app-bar__action-item" title="<%= t 'activerecord.models.user' %><%= t :edit %>"><%= @current_user.name %></a></h3>
+        <h6 class="mdc-drawer__subtitle"><%= @current_user.mail %></h6>
+      </div>
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list" data-mdc-auto-init="MDCList">
+          <hr class="mdc-list-divider">
+          <a class="mdc-list-item" href="/" tabindex="-1"><i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i><%= t :home %></a>
+          <a class="mdc-list-item" href="/questions" tabindex="-1"><i class="material-icons mdc-list-item__graphic" aria-hidden="true">contact_support</i><%= t 'activerecord.models.question' %><%= t :management %></a>
+          <a class="mdc-list-item" href="/categories" tabindex="-1"><i class="material-icons mdc-list-item__graphic" aria-hidden="true">category</i><%= t 'activerecord.models.category' %><%= t :management %></a>
+          <hr class="mdc-list-divider">
+          <a class="mdc-list-item" href="/logout" data-method="post" tabindex="-1"><i class="material-icons mdc-list-item__graphic" aria-hidden="true">directions_run</i><%= t :logout %></a>
+        </nav>
+      </div>
+    </aside>
+<% end %>
+    <div class="mdc-drawer-app-content">
+      <div id="main-content" class="mdc-top-app-bar--fixed-adjust main-content">
+        <% if flash[:notice] %>
+        <h4 class="mdc-typography--headline4 notice"><%= flash[:notice] %></h4>
+        <% end %>
+        <%= yield %>
+      </div>
     </div>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <script>window.mdc.autoInit();</script>
+    <script>
+    window.mdc.autoInit();
+    </script>
   </body>
 </html>

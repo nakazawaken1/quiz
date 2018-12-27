@@ -2,9 +2,46 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      question: お題
+      category: カテゴリ
     attributes:
       user:
         name: お名前
         mail: メール
         password: パスワード
         password_confirmation: パスワード確認
+      question:
+        question: 問題
+        answer: 答え
+        hint: ヒント
+        comment: 解説
+      category:
+        name: カテゴリ名
+  title: いきなりクイズ
+  login_failed: メールまたはパスワードが違います。
+  user_created: ユーザー登録が完了しました。ログインできます。
+  user_updated: ユーザー情報を更新しました。
+  correct: 正解
+  incorrect: 残念
+  signup: ユーザー登録
+  login: ログイン
+  logout: ログアウト
+  show: 詳細表示
+  new: 新規作成
+  create: 登録
+  created: 登録しました。
+  edit: 編集
+  update: 更新
+  updated: 更新しました。
+  destroy: 削除
+  destroyed: 削除しました。
+  respond: 回答
+  preparing: 準備中です
+  back: 戻る
+  confirm_destroy: 削除してもよろしいですか？
+  prompt_signup: 未登録の方はこちら
+  operation: 操作
+  list: 一覧
+  management: 管理
+  home: ホーム
+  empty: まだ登録されていません。

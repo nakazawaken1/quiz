@@ -1,0 +1,40 @@
+<h1><%= t 'activerecord.models.category' %><%= t category.id ? :edit : :new %></h1>
+
+<%= form_with(model: category, url: '/categories' + (category.id ? "/#{category.id}" : ''), local: true) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <input type="text" name="name" id="name" value="<%= @category.name %>" class="mdc-text-field__input">
+      <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+              <label for="name" class="mdc-floating-label"><%= t 'activerecord.attributes.category.name' %></label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+      </div>
+  </div>
+  <div class="br"></div>
+  <button type="submit" class="mdc-button
+                       mdc-button--raised
+                       mdc-button--primary
+                       mdc-ripple-surface"
+                data-mdc-auto-init="MDCRipple"><%= t(category.id ? :update : :create) %></button>
+  <% if category.id %>
+  <a href="/categories/<%= category.id %>" data-method="delete" class="mdc-button
+                       mdc-button--outlined
+                       mdc-button--secondary
+                       mdc-ripple-surface"
+                data-mdc-auto-init="MDCRipple"><%= t :destroy %></a>
+  <% end %>
+  <%= link_to t(:back), categories_path %>
+<% end %>

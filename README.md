@@ -16,30 +16,50 @@ webエンジニア版／スキルチェック
 コードでの自己アピールの場と思って、好きなように実装してください
 
 * Rails (最新版を推奨) を使っていること
+=> Rails 5.2.2 を使用しました。
 
 * RSpec によるテストを書いていること
+=> users_spec.rb でユーザ登録部分のテストを書きました。
 
 * ユーザ認証を行っていること
+=> rails標準機能の has_secure_password を使用しました。
 
 * has_many through を使用していること
+=> question と category で使用しました。(すいません、時間の関係で登録画面での対応が対応途中です。)
 
 * DB(RDB) にたいする CRU 操作を行うこと
+=> ユーザー登録、編集、カテゴリ管理、お題管理でMySQLにアクセスしています。
 
 また、以下も添えてください
 
 * 作った Web アプリケーションのアピールポイント
+→ Materialデザインを取り入れました。(MATERIAL COMPONENTS FOR THE WEB)
+→ クラウドサーバを契約してisoイメージから CentOS7, MySQL8, Ruby2.5をインストールしサーバを立ち上げました
+→ドメインを取得し設定しました zir.jp
+→Let's Encryptの証明書を取得設定しました。
 
 * 苦労した点
+・WindowsでVisualStudioCodeを使用して開発環境を作る際、
+制限ユーザだとうまく動作しない部分が多々あり、
+文字コードの問題もあり時間を要しました。
+・はじめてMATERIAL COMPONENTS FOR THE WEBを使用したので、
+使い方を把握するまで時間を要しました。
 
 * 工夫した点
+・日本語を ja.yml に集約し多言語対応しやすいよう留意しました。
+・コード中の文字列が少なくなるようにシンボルを多用しました。
 
 * その他感想など
-
+・Rails2からしばらくRubyをさわっていなかったため、
+Rails5になれるのに時間を要しました。
+・JavaのSpring等のフレームワークで開発するほうが
+静的チェックや定義元・参照先参照、識別子の一括リネーム等ができるので
+やりやすいと感じました。
+・トータルの作業時間はおよそ20時間でした。
 
 
 ------------------------------------------------------------------------------------------------------ 
-
-宜しくお願いします。
+以下に作業メモを残しておきます。
 
 作業PC: Windows 10, Corei5, 32GB, SSD512GB
 
@@ -98,7 +118,9 @@ rails s
 rails g model User name:string mail:string password_digest:string token:string
 rails g model Question question:string answer:string hint:string comment:string
 rails g model Category name:string
+rails g model CategoryQuestion category_id:integer question_id:integer
 rails db:migrate
+rails db:migrate RAILS_ENV=test
 
 コントローラ作成
 rails g controller Users new
@@ -119,7 +141,7 @@ index.html.erb
 
 [テストデータ作成]
 MySQL management tool プラグインを入れて作成されたテーブルを確認
-insert into quiz_development.questions values(null, '日本一高い山は？', '富士山', '一文字目は「ふ」です', '静岡県と山梨県にまたがる活火山で標高は3776mです。2番目は山梨県にある北岳で3193mです。', now(), now());
+insert into quiz_development.questions(question, answer, hint, comment, created_at, updated_at) values('日本一高い山は？', '富士山', '漢字三文字です', '静岡県と山梨県にまたがる活火山で標高は3776mです。2番目は山梨県にある北岳で3193mです。', now(), now());
 select * from quiz_development.questions;
 
 [ajax有効化]

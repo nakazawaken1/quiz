@@ -1,0 +1,77 @@
+<h1><%= t 'activerecord.models.question' %><%= t question.id ? :edit : :new %></h1>
+
+<%= form_with(model: question, url: '/questions' + (question.id ? "/#{question.id}" : ''), local: true) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <textarea name="question" id="question" class="mdc-text-field__input" rows="3" cols="80"><%= @question.question %></textarea>
+      <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+              <label for="question" class="mdc-floating-label"><%= t 'activerecord.attributes.question.question' %></label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+      </div>
+  </div>
+  <div class="br"></div>
+
+  <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <input type="text" name="answer" id="answer" value="<%= @question.answer %>" class="mdc-text-field__input">
+      <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+              <label for="answer" class="mdc-floating-label"><%= t 'activerecord.attributes.question.answer' %></label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+      </div>
+  </div>
+  <div class="br"></div>
+  
+  <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <textarea name="hint" id="hint" class="mdc-text-field__input" rows="3" cols="80"><%= @question.hint %></textarea>
+      <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+              <label for="hint" class="mdc-floating-label"><%= t 'activerecord.attributes.question.hint' %></label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+      </div>
+  </div>
+  <div class="br"></div>
+
+  <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <textarea name="comment" id="comment" class="mdc-text-field__input" rows="3" cols="80"><%= @question.comment %></textarea>
+      <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+              <label for="comment" class="mdc-floating-label"><%= t 'activerecord.attributes.question.comment' %></label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+      </div>
+  </div>
+  <div class="br"></div>
+
+  <button type="submit" class="mdc-button
+                       mdc-button--raised
+                       mdc-button--primary
+                       mdc-ripple-surface"
+                data-mdc-auto-init="MDCRipple"><%= t(question.id ? :update : :create) %></button>
+  <% if question.id %>
+  <a href="/questions/<%= question.id %>" data-method="delete" class="mdc-button
+                       mdc-button--outlined
+                       mdc-button--secondary
+                       mdc-ripple-surface"
+                data-mdc-auto-init="MDCRipple"><%= t :destroy %></a>
+  <% end %>
+  <%= link_to t(:back), questions_path %>
+<% end %>
