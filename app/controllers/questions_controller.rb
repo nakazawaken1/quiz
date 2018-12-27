@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   def home
     unless cookies.permanent[:question_id]
       questions = Question.order("RAND()").limit(1);
-      cookies.permanent[:question_id] = questions.empty? ? null : questions[0].id
+      cookies.permanent[:question_id] = questions.empty? ? nil : questions[0].id
     end
     @question = Question.find_by(id: cookies.permanent[:question_id])
   end

@@ -10,7 +10,7 @@ describe 'users', type: :request do
     expect(response).to redirect_to('/')
     follow_redirect!
 
-    expect(response).to render_template(:index)
+    expect(response).to render_template(:home)
     expect(response.body).to include(I18n.t(:user_created))
   end
 end
